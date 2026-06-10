@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Brain Cloud - System Login</title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+    <style>
+        body { background: #008080; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .window { width: 350px; padding: 20px; }
+        #login-area { display: block; }
+        #success-area { display: none; font-family: monospace; }
+        .warning-text { color: #cc0000; font-weight: bold; }
+        .input-group { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="window">
+    <div class="title-bar"><div class="title-bar-text">Brain Cloud Archive Terminal</div></div>
+    <div class="window-body">
+        <div id="login-area">
+            <div class="input-group">
+                <p>User ID:</p>
+                <input type="text" id="user-input" style="width: 90%;">
+            </div>
+            <div class="input-group">
+                <p>Memory Key:</p>
+                <input type="password" id="pass-input" style="width: 90%;">
+            </div>
+            <button onclick="checkLogin()" style="margin-top: 10px;">Login</button>
+        </div>
+
+        <div id="success-area">
+            <p>> Identity Match: 98.7%</p>
+            <p>> Memory Sync Complete.</p>
+            <p>> Neural Signature Verified.</p>
+            <p>> Archive Access Granted.</p>
+            <hr>
+            <p>Access Level: <strong>Archive View Only</strong></p>
+            <p class="warning-text">WARNING<br>Unauthorized duplication prohibited.</p>
+            <div style="text-align: center;">
+                <button onclick="location.href='index_desktop.html'">[ CONTINUE ]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function checkLogin() {
+        const user = document.getElementById('user-input').value;
+        const pass = document.getElementById('pass-input').value;
+        
+        if (user.length > 0 && pass.length > 0) {
+            document.getElementById('login-area').style.display = 'none';
+            document.getElementById('success-area').style.display = 'block';
+        } else {
+            alert("Identity verification failed.");
+        }
+    }
+</script>
+
+</body>
+</html>

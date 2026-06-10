@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Brain Cloud - Archive Explorer</title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+   <style>
+    body { background: #008080; font-family: "MS Sans Serif", sans-serif; padding: 20px; }
+    
+    /* ウィンドウを画面中央に配置 */
+    .window { 
+        width: 500px; 
+        height: auto; 
+        margin: 0 auto; /* これでウィンドウが中央に */
+    }
+    
+    /* 中身のアイコンは左寄せのまま */
+    .window-body { 
+        text-align: left; 
+        padding: 10px; 
+    }
+    
+    .icon { width: 64px; text-align: center; margin: 10px; cursor: pointer; display: inline-block; vertical-align: top; }
+    .icon img { width: 32px; height: 32px; margin-bottom: 5px; }
+    .status-bar { font-size: 0.8em; padding: 2px 5px; border-top: 1px solid #808080; margin-top: 10px; }
+    
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+             background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 100; }
+  </style>
+
+</head>
+<body>
+
+<div class="window">
+    <div class="title-bar"><div class="title-bar-text">C:\ARCHIVE\BRAIN_CLOUD\RESTRICTED</div></div>
+    <div class="window-body">
+        <div class="icon" onclick="openModal('1.png')"><img src="png.png"><div>Archive_00.txt</div></div>
+        <div class="icon" onclick="openModal('2.png')"><img src="png.png"><div>Archive_01.txt</div></div>
+        <div class="icon" onclick="openModal('3.png')"><img src="png.png"><div>Archive_02.txt</div></div>
+        <div class="icon" onclick="openModal('4.png')"><img src="png.png"><div>Archive_03.txt</div></div>
+        <div class="icon" onclick="openModal('5.png')"><img src="png.png"><div>Archive_04.txt</div></div>
+        <div class="icon" onclick="openModal('6.png')"><img src="png.png"><div>Archive_05.txt</div></div>
+        <div class="icon" onclick="openModal('7.png')"><img src="png.png"><div>Archive_06.txt</div></div>
+        <div class="icon" onclick="openModal('8.png')"><img src="png.png"><div>Archive_07.txt</div></div>
+        <div class="icon" onclick="openModal('9.png')"><img src="png.png"><div>Archive_08.txt</div></div>
+        <div class="icon" onclick="openModal('10.png')"><img src="png.png"><div>Clipping_01.txt</div></div>        
+        <div class="icon" onclick="alert('ERROR 403\n\nACCESS DENIED\n\nThis archive has been restricted by the Ethics Committee.\n\nReference:\nBC-ETH-008')">
+            <img src="png.png"><div>Archive_09.txt</div>
+        </div>
+        <div class="icon" onclick="alert('ERROR 404\n\nFILE NOT FOUND\n\nRecovery Attempt Failed')">
+            <img src="png.png"><div>Archive_10.txt</div>
+        </div>
+        <div class="icon" onclick="alert('WARNING\n\nDATA CORRUPTION DETECTED\n\n██████████████')">
+            <img src="png.png"><div>Archive_11.txt</div>
+        </div>
+    </div>
+        <div class="status-bar">
+         <p class="status-bar-field">12 object(s)</p>
+         <p class="status-bar-field">Access Level: Archive View Only</p>
+        </div>
+</div>
+
+<div id="myModal" class="modal" onclick="closeModal()">
+    <img id="modalImg" src="">
+</div>
+
+<footer style="margin-top: 20px; font-size: 0.7em; color: #ffffff; text-align: center;">
+    <a href="https://www.flaticon.com/free-icons/png" title="png icons" style="color: #ffffff;">Png icons created by Smashicons - Flaticon</a>
+</footer>
+
+<script>
+    const modal = document.getElementById("myModal");
+    
+    function openModal(src) {
+                        
+        // モーダルの背景にLoading文字を入れる（一時的に）
+        modal.innerHTML = '<div style="color: #fff; font-size: 20px;">Loading scan...</div>';
+        modal.style.display = "flex";
+
+        // 1秒後にスキャン完了を表示し、さらにその後に画像を表示
+        setTimeout(() => {
+            modal.innerHTML = '<div style="color: #0f0; font-size: 20px;">Scan Complete.</div>';
+            
+            setTimeout(() => {
+
+    modal.innerHTML = `
+    <div style="text-align:center;">
+
+        <img
+            id="modalImg"
+            src="${src}"
+            style="
+                max-width:90%;
+                max-height:80vh;
+                border:3px outset #fff;
+                cursor:pointer;
+            "
+        >
+
+        <div style="
+            margin-top:10px;
+            background:#c0c0c0;
+            border:2px inset #fff;
+            padding:8px;
+            font-family:monospace;
+            text-align:left;
+            width:350px;
+            margin-left:auto;
+            margin-right:auto;
+        ">
+            Archive ID : BC-0X<br>
+            Source     : Physical Document<br>
+            Digitized  : 20XX.0X.X1<br>
+            Integrity  : 94%
+        </div>
+
+    </div>
+    `;
+
+    document.getElementById('modalImg').onclick = closeModal;
+
+}, 800);
+            
+        }, 1000); // 1秒間「Loading」を表示
+    }
+
+    function closeModal() {
+        modal.style.display = "none";
+        // モーダルの中身をリセットしておく（次回のため）
+        modal.innerHTML = '<img id="modalImg" src="">';
+    }
+</script>
+
+</body>
+</html>
